@@ -180,3 +180,72 @@ function bottlesSoldBarGraph(data) {
         return $resultArray;
     }
 ************************************** Last12Month **************************************
+************************************** Missing Date **************************************
+ case 'ecp_sales_bind':
+    $data       = '';
+    $response   = [];
+
+    $data      .="
+    <h3>ECP Sales Mapping - Allocated Dates & Missing Dates</h3>
+    <table id='practice2' border='1' class='ecp sales bind table table-bordered table-striped table-hover'><thead>
+    <tr>
+    <th>#</th>
+    <th>ECP Name</th>
+    <th>Allocated Dates</th>
+    <th>Missing Dates</th>
+    </tr>
+    </thead>
+    <tbody>";
+    $k = 0;
+    $pro_list  = $data_aintenance_db->FetchProviderList();
+    $index_arr = [];
+    foreach ($pro_list as $key => $value) {
+        $k++;
+        $i = $m = 0;
+        $ecp_id = $value['id'];
+        $missing_dates = $allocated_dates = '';
+        $data      .="<tr>
+        <td>$k</td>
+        <td><a href='" . SITE_URL . DS . "user/ecp_edit.php?ecp_id=$ecp_id#doc_sales_section' target='_blank'>" . $value['provider_physician_name'] . "</a></td>
+        ";
+
+        $ecp_first_ord_date = $data_aintenance_db->getEcpFirstOrdDate($value['idprovider']);
+        $sales_mapping_rows = $data_aintenance_db->fetchProvideeSalesuserMappingRows($value['idprovider']);
+        if(!empty($sales_mapping_rows)){
+            foreach ($sales_mapping_rows as $sales_mapp_row) {
+                $i++;
+                $ord_fdate   = strtotime(date("Y-m-d", strtotime($ecp_first_ord_date[0]['OrderDate'])));
+                $sales_fdate = strtotime(date("Y-m-d", strtotime($sales_mapp_row['start_date'])));
+                if($i == 1 && $ord_fdate <= $sales_fdate){
+                    $m++;
+                    $missing_dates .= "$m. From ".date("m/d/y", $ord_fdate)." To ".date("m/d/y", strtotime('-1 day', $sales_fdate))."<br>";
+                } else if($i > 1){
+                    if(end($index_arr['end_date']) <= $sales_fdate){
+                       $m++;
+                        $missing_dates .= "$m. From ".date("m/d/y", strtotime('+1 day', end($index_arr['end_date'])))." To ".date("m/d/y", strtotime('-1 day', $sales_fdate))."<br>";
+                    }
+                }
+                $allocated_dates .= "$i. From ".date("m/d/y", strtotime($sales_mapp_row['start_date']))." To ".date("m/d/y", strtotime($sales_mapp_row['end_date']))." - ".$sales_mapp_row['name']."<br>";
+                $index_arr['start_date'][] = strtotime(date("Y-m-d", strtotime($sales_mapp_row['start_date'])));
+                $index_arr['end_date'][]  =  strtotime(date("Y-m-d", strtotime($sales_mapp_row['end_date'])));
+            }
+        }
+        if(!empty($sales_mapping_rows)){
+            if(end($index_arr['end_date']) <= strtotime(date('Y-m-d'))){
+               $m++;
+                $missing_dates .= "$m. From ".date("m/d/y", strtotime('+1 day', end($index_arr['end_date'])))." To ".date("m/d/y")."<br>";
+            }
+        }
+        if(!empty($ecp_first_ord_date) && empty($sales_mapping_rows)){
+            $missing_dates = '1. From '.date("m/d/y", strtotime($ecp_first_ord_date[0]['OrderDate'])).' To '.date("m/d/y");
+        }
+        $data      .="
+        <td>$allocated_dates</td>
+        <td>$missing_dates</td>
+        </tr>";
+    }
+    $data.="</tbody></table>";
+    $response['table_data'] = $data;
+    echo json_encode($response);
+    break;
+************************************** Missing Date **************************************
