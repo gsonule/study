@@ -1,0 +1,182 @@
+******************************************Custom Scroll Code******************************************
+$("#ecp_name").keydown(function(e) {
+    if($('#ecp-list li').is(':visible')) {  
+        var top         = $('#ecp-list').scrollTop(); 
+        var ulheight    = $('#ecp-list')[0].scrollHeight; 
+        var liheight    = $('#ecp-list').find('.selected').prev().outerHeight();
+    } 
+    switch (e.which) {
+        case 40:
+            e.preventDefault(); // prevent moving the cursor
+            var next_cont_value = $('#ecp-list li:not(:last-child).selected').removeClass('selected').next().addClass('selected');
+            $val = next_cont_value.text(); 
+            $val1 = next_cont_value.attr('value'); 
+            if($val){
+                 $("#ecp_name").val($val);
+            }
+            if($val1){
+                 $("#ecp_id").val($val1);
+            }
+           //scroll code
+            var nextHeight  = top + liheight; 
+            var maxHeight   = ulheight - liheight;
+            if((nextHeight <= maxHeight)){
+                $('#ecp-list').scrollTop(top + liheight);
+            } else {
+                $('#ecp-list').scrollTop(0); //scrolling
+            }
+        break;
+        case 38:
+            e.preventDefault(); // prevent moving the cursor
+            var prv_cont_value = $('#ecp-list li:not(:eq(1)).selected').removeClass('selected').prev().addClass('selected');
+
+            $val = prv_cont_value.text(); 
+            $val1 = prv_cont_value.attr('value'); 
+
+            if($val){
+                 $("#ecp_name").val($val);
+            }
+            if($val1){
+                 $("#ecp_id").val($val1);
+            }
+            //scroll code
+            if(top != 0) {
+                $('#ecp-list').scrollTop(top - liheight); //scrolling
+            }
+        break;
+    }
+});
+
+$("#ecp_name").keyup(function(e) {    
+    if ($(this).val().length >= 3 && e.which != 40 && e.which != 38) {
+        $("#ecp_suggesstions").html('');
+        
+        fetch_ecp_suggestions();     
+    }
+});
+******************************************Custom Scroll Code******************************************
+
+***************************************** Date Month Year Scroll Code *************************************
+ case "getTotalBottlesSoldBargraph":
+
+        $one_month_interval = new DateInterval("P1M"); // 1 month
+        $occurrence = 11;
+        $previous_jan_dt = date('Y-m-d 00:00:00',strtotime("January 1st"));
+        $previous_year_start = DateTime::createFromFormat("Y-m-d 00:00:00",$previous_jan_dt);
+        $previous_year = new DatePeriod($previous_year_start,$one_month_interval,$occurrence);
+
+        foreach($previous_year as $pre_dt){
+            $pre_start_dt   = $pre_dt->format("Y-m-d 00:00:00");
+            $pre_end_dt     = $pre_dt->format("Y-m-t 23:59:59");
+            $strMonth           = date("M", strtotime($pre_start_dt));
+            if ($pre_start_dt < date('Y-m-d 00:00:00')) {
+                $bottles_sold = $serviceObj["dashboardObj"]->getRevenueBottlesTotal($pre_start_dt,$pre_end_dt);
+                $bottles_sold_partial = $serviceObj["dashboardObj"]->getRevenueBottlesTotalPartial($pre_start_dt,$pre_end_dt);
+                $btlSoldArr[] = $bottles_sold['total_bottles']-$bottles_sold_partial['total_bottles_partial'];
+                $monthArr[] = $strMonth;
+            }else{
+                continue;
+            }
+        }
+        echo json_encode(array(
+                            'bottles_sold' => $btlSoldArr,
+                            'month' => $monthArr
+                        ));
+    break;
+************************************** Date Month Year Scroll Code **************************************
+************************************** HighChart **************************************
+function getbottlesSoldBarGraph() {
+	  	$.ajax({
+	    	type: "POST",
+			url: site_url + "/ajax/dashboard-ajax.php",
+			data: "type=getTotalBottlesSoldBargraph",
+			dataType: "json",
+			beforeSend : function() {
+		     $('#bottleSoldBarGraph').loader({
+		        'loader': 'on',
+		        'img_url': site_url + '/assets/images/circularloader.gif'
+		      });
+		    },
+	    	success: function(data) {
+			  $('#bottleSoldBarGraph').loader({
+		        'loader': 'off'
+		      });
+	      		bottlesSoldBarGraph(data);
+	    	}
+	  	});
+	}
+function bottlesSoldBarGraph(data) {
+		var actPatient 	= data['bottles_sold'];
+		var months 		= data['month'];
+		var chart = new Highcharts.Chart({
+		chart: {
+		  renderTo: 'bottleSoldBarGraph',
+		        type: 'column',
+		      },
+		      title: {
+		        text: '',
+		      },
+		      credits: {
+		        enabled: false
+		      },
+		      yAxis: {
+		        title: {
+		          text: '',
+		          useHTML: true,
+		          style: {
+		            "-webkit-transform": "rotate(90deg)",
+		            "-moz-transform": "rotate(90deg)",
+		            "-o-transform": "rotate(90deg)",
+		            "margin-left": "-22px",
+		          }
+		        }
+		      },
+		      tooltip: {
+		        useHTML: false,
+		        formatter: function() {
+		          var text = this.key;
+		          var new_text = text.replace("<br/>", " ");
+		          return '<div class="tooltip"> Month : ' + new_text + '<br>Bottles Sold: ' + this.y +	
+		          '</div>';
+		        }
+		      },
+		      xAxis: {
+		        text: 'Months',
+		        categories: months
+
+		      },
+		      series: [{
+		        showInLegend: false,
+		        data: actPatient,
+		        color: "#50C1E3",
+		        lineWidth: 4,
+		        marker: {
+		          symbol: 'circle',
+		          lineWidth: 6,
+		            lineColor: '#50C1E3', //Highcharts.getOptions().colors[0],
+		            fillColor: 'blue'
+		          }
+		        }]
+		});
+    }
+************************************** HighChart **************************************
+************************************** Last12Month **************************************
+   Public function Last12Month() {
+        $patients = $monthArr =  $resultArray = array();
+        $j=11;
+        for ($i = 0; $i <= 11; $i++) {
+            $date       = date("Y-m-d", strtotime(date('Y-m-01')." -$j months"));
+            $year       = date("Y", strtotime($date));
+            $month      = date("m", strtotime($date));
+            $strMonth   = date("M", strtotime($date));
+            $get_pat    = $this->getPatientMonthYear($year,$month);
+            $patients[] = (int)$get_pat;
+            $monthArr[] = $strMonth . '<br/>' . $year;
+            $j--;
+        }
+        $resultArray['totPatient'] = array_sum($patients);
+        $resultArray['patient']    = $patients;
+        $resultArray['month']      = $monthArr;
+        return $resultArray;
+    }
+************************************** Last12Month **************************************
