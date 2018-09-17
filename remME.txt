@@ -1,0 +1,13 @@
+http://www.voidtricks.com/add-remember-me-php/
+
+
+
+// cookies values var_dump($_COOKIE);
+if (isset($_COOKIE['user']) && !empty($_COOKIE['user'])) {
+    $email = $_COOKIE['user'];
+     echo "<script type='text/javascript'>
+        $(document).ready(function(){
+            setTimeout(function(){ $('#login').trigger('click'); }, 3000);
+        });
+    </script>";
+}

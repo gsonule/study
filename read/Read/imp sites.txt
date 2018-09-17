@@ -1,0 +1,160 @@
+Wordpress links for study:
+
+http://www.smashingmagazine.com/2011/03/ten-things-every-wordpress-plugin-developer-should-know/#more-90172
+
+
+Table sorting:
+http://tympanus.net/codrops/2009/10/03/33-javascript-solutions-for-sorting-tables/
+
+http://www.c-sharpcorner.com/UploadFile/0870a0/registration-and-login-form-in-php-using-oop/
+
+http://www.w3resource.com/php/super-variables/$_SERVER.php
+
+https://www.wonderplugin.com/wordpress-slider/
+
+https://premium.wpmudev.org/blog/most-popular-free-wordpress-slider-plugins/
+
+https://premium.wpmudev.org/blog/wordpress-plugin-development-guide/
+
+https://premium.wpmudev.org/blog/stunning-free-themes/
+
+http://www.sample-videos.com/
+
+https://wordpress.org/plugins/ai-responsive-gallery-album/screenshots/
+
+http://dancameron.org/code/display-a-loading-image-until-the-page-completes-loading/
+
+http://www.netavatar.co.in/category/development/php/
+
+https://premium.wpmudev.org/blog/wordpress-plugin-development-guide/
+
+https://codex.wordpress.org/New_To_WordPress_-_Where_to_Start
+
+https://codex.wordpress.org/Plugins
+
+https://codex.wordpress.org/Linking_Posts_Pages_and_Categories
+
+http://code.tutsplus.com/tutorials/create-a-custom-wordpress-plugin-from-scratch--net-2668
+
+https://developer.wordpress.org/plugins/
+
+https://developer.wordpress.org/themes/functionality/navigation-menus/
+
+https://www.airpair.com/wordpress/posts/developing-wordpress-plugin-from-scratch
+
+http://www.creativebloq.com/web-design/wordpress-tutorials-designers-1012990
+
+http://www.techflirt.com/tutorials/oop-in-php/classes-and-objects-php.html
+
+http://www.techflirt.com/tutorials/oop-in-php/magic-methods-in-php.html
+
+https://www.siteground.com/tutorials/wordpress/wordpress_start.htm
+
+https://www.siteground.com/tutorials/wordpress/new-wordpress-post.htm
+
+https://www.siteground.com/tutorials/wordpress/facebook_like_button.htm
+
+http://dailymaza.com/download/
+
+http://ditio.net/2011/12/09/how-to-backup-your-wordpress-blog/
+
+https://codex.wordpress.org/Category:WordPress_Development
+
+http://www.1stwebdesigner.com/wordpress-plugin-development-course-designers-1/
+
+
+
+http://www.allitebooks.com/professional-wordpress-plugin-development/
+
+For free ebooks:
+1.http://onlinevideolecture.com/ebooks/
+2.http://onlinevideolecture.com/ebooks/?subject=WordPress&publisher=Wrox
+3.http://it-ebooks.info/     -----***IMP site for free books****
+
+
+
+http://www.w3schools.com/jsref/default.asp
+
+http://www.tutorialspoint.com/
+
+http://www.brainyquote.com/quotes/topics.html
+
+Sparkling Wordpress theme:
+https://wordpress.org/themes/sparkling/ 
+
+plugin for sharing post/page on site:
+https://wordpress.org/plugins/simple-share-buttons-adder/
+
+http://www.web-technology-experts-notes.in/2015/04/php-interview-questions-and-answers-for-2-year-experience.html
+
+http://codex.wordpress.org/Creating_a_Static_Front_Page
+
+
+Question: How to scrape the data from website using CURL?
+
+To scrap the data from website, Website must be public and open for scrapable.
+In the blow code, Just update the CURLOPT_URL to which websites data you want to scrap.
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://www.web-technology-experts-notes.in/");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+$output = curl_exec($ch);
+curl_close($ch);
+echo $output;
+
+
+http://www.gametop.com/category/top.html
+
+
+https://codex.wordpress.org/Advanced_Topics
+
+Used for suggestions of sitenames:
+http://www.namemesh.com/
+
+share content on facebook using core php:
+https://help.yahoo.com/kb/SLN18861.html
+
+
+touch() function is used to create file..
+
+
+http://www.phptpoint.com/
+
+know the platform of site(site/framework/server):
+http://builtwith.com/
+
+
+http://www.knowahead.in/2012/12/how-to-sen	d-same-email-to-multiple-recipients-in-php-by-csv-upload/
+
+http://www.scratchinginfo.net/php/
+
+http://www.scratchinginfo.net/php-tutorials-techniques-and-components/
+
+http://www.scratchinginfo.net/wordpress-plugins/
+
+http://www.scratchinginfo.net/php-tutorials-techniques-and-components/
+
+http://www.hackingwithphp.com/
+
+http://www.developer.com/lang/php/
+
+http://www.phpbuilder.com/articles
+http://www.phpbuilder.com/articles/databases/how-to-connect-your-php-application-to-google-cloud-storage.html
+
+
+submit form without submit button:
+
+document.getElementById("formID").submit();
+document.formname.submit();
+
+
+javascript debugger:
+http://www.jslint.com/
+
+https://www.siteground.com/tutorials/wordpress/
+
+for free .net ebooks in pdf:
+http://www.syncfusion.com/resources/techportal/ebooks?utm_medium=codeprojebJan16
+
+
+http://www.tutorialspoint.com/wordpress/wordpress_interview_questions.htm

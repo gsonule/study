@@ -1,0 +1,19 @@
+$dbc = new PDO('oci:dbname=192.168.10.145/orcl;
+charset=CL8MSWIN1251', 
+'username', 
+'password');
+
+$dbh = new PDO('oci:dbname=localhost/XE', 'hr', 'welcome');
+$s = $dbh->prepare("select city from locations");
+$s->execute();
+while (($r = $s->fetch(PDO::FETCH_ASSOC)) != false) {
+ echo htmlentities($r['CITY']) . "<br>";
+}
+
+11g express edition
+Destination Folder: C:\oraclexe\
+Oracle Home: C:\oraclexe\app\oracle\product\11.2.0\server\
+Oracle Base:C:\oraclexe\
+Port for 'Oracle Database Listener': 1521
+Port for 'Oracle Services for Microsoft Transaction Server': 2030
+Port for 'Oracle HTTP Listener': 8080

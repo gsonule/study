@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<p id="demo">Ajax Chage Text</p>
+			<button type="button" onclick="loadDoc()">Change Content</button>
+				<script>
+				var xhttp;
+					if(window.XMLHttpRequest){
+						//code for modern browsers
+						xhttp = new XMLHttpRequest();
+					}	
+					else{
+						//code for IE
+						xhttp = new ActiveXObject("Microsoft:XMLHTTP");
+					}
+					xhttp.onreadystatechange = function(){
+					if(xhttp.readystate ==4	&& xhttpstatus == 200){
+						document.getElementById("demo").innerHTML = xhttp.response.Text;
+					}	
+					};
+					xhttp.open("GET","ajax_info.txt",true);
+					xhttp.send();
+				</script>
+				
+	</body>			
+</html>

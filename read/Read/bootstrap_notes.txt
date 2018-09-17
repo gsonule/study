@@ -1,0 +1,92 @@
+Bootstrap:
+ -Free front-end framework for faster and easiest web developement.
+
+ -includes HTML and CSS based design templates for typography,forms,buttons,tables, navigations,modals,image carousels & many others as well as javascript plugins.
+
+ -gives ability to create responsive websites.
+
+ -Responsive Web Design:creating websites which automatically adjust themeselves to look good in all devices from small phones to large desktops.
+
+Advantage of Bootstrap: 
+
+ -Easy to use
+ -Responsive features
+ -Mobile-first approach
+ -Browser Compatibility
+
+
+Bootstrap CDN:
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+Bootstrap uses HTML5 DOCTYPE at the begining of the page,along with the lang attribute and correct character set:
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	</head>
+</html>
+
+Bootstrap 3 is mobile first:
+  Designed to be responsive to mobile devices.Mobile first styles are part of the core framework.
+
+Addn following <meta> tag for proper rendering and touch zooming inside the <head> tag:
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+-width=device-width set the width of the page to follow the screen width of te devices.
+-initial-scale=1 sets the initial zoom level when the page is first loaded by the browser.
+
+
+*Containers:	
+Bootstrap requires containing element to wrap up the content of the site.
+
+Two container classes to choose	from:
+1) .container: for responsive fixed width container
+2) .container-fluid: for full width containe, spaning the entire width of the viewport.
+
+-containers are not nestable(we can not put a container inside another container).
+
+
+Bootstrap Grid system:
+
+-Bootstrap grid system allows upto 12 columns across the page.
+-If you do not want to create 12 column individually, you can group the columns together to create wider columns.
+-Grid system is responsive and columns are rearrange automatically depending on the screen size.
+
+Grid Classes:
+-Grid system has 4 classes
+1)xs(for phones)
+2)sm(for tablets)
+3)md(for desktops)
+4)lg(for larger desktops)
+
+Structure of bootstrap grid:
+
+<div class="row">
+ <div class="col-*-*"></div>
+</div>
+<div class="row"> 
+ <div class="col-*-*"></div>
+ <div class="col-*-*"></div>	
+ <div class="col-*-*"></div>
+</div>
+<div class="row">
+.
+.
+.
+</div>
+
+
+
+*Basic Bootstrap table:
+Bootstrap table has light padding and only horizontal dividers.
+The .table class adds basic styling to table.

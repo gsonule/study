@@ -1,0 +1,48 @@
+SELECT sql FROM sqlite_master
+WHERE tbl_name = 'table_name' AND type = 'table'
+
+
+array (size=2)
+  0 => 
+    array (size=2)
+      'name' => string 'txt' (length=3)
+      0 => string 'txt' (length=3)
+  1 => 
+    array (size=2)
+      'name' => string 'dummy' (length=5)
+      0 => string 'dummy' (length=5)
+
+                                                         $all_table_json = json_encode($all_tables);
+
+ SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'COMPANY';
+
+
+
+
+
+
+
+
+
+$db = new PDO("sqlite:C:\sqlite\SQLiteStudio\alexa_panel.db"); //DB name must be their with ext .db //path may be diff
+							//$qry="SELECT sql FROM sqlite_master WHERE type = 'table'";
+                                                        //$qry="SELECT * FROM dummy LIMIT 1" ;
+                                                    // $result = $db->query('SELECT * table') or die('Query failed');
+                                                     $qry="SELECT sql FROM sqlite_master WHERE tbl_name = 'txt' AND type = 'table'";
+                                                     //  $result = $db->query("SELECT  FROM sqlite_master WHERE type = 'table'") or die('Query failed');
+                                                       
+                                                       $st =$db->prepare($qry);
+                                                       $st -> execute();
+                                                       $colcount = $st->columnCount();
+                                                                                    //     $result = $st->fetchColumn(2);
+                                                                                     //            var_dump($result);
+                                                        $all_tables = $st->fetchAll(PDO::FETCH_ASSOC);
+                                                       
+                                                       foreach ($all_tables as $column => $v ) {
+                                                                           var_dump($v);
+                                                           for($i=0;$i<$colcount;$i++){
+                                                         $key = array_keys($v)[$i]; 
+                                                                        echo "$key"."</br>";   
+                                                                        
+                                                                                  }  
+                                                       }

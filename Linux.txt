@@ -1,0 +1,252 @@
+
+
+    apache2: sudo /etc/init.d/apache2 restart
+
+    mysql: sudo /etc/init.d/mysql restart
+
+
+mkdir folder_name      make folder
+ls -a                  view hidden files    
+sudo rm -r -f /path/   remove folder
+mv /oldname /newname   rename folder
+
+
+
+//// virtual server setup
+
+
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/myproject.conf
+    	
+sudo a2enmod rewrite
+sudo cp default.conf local.eyecheck.conf
+
+
+    ServerAdmin webmaster@local.eycheck.com
+        ServerName local.eyecheck.com
+        ServerAlias local.eyecheck.com
+        DocumentRoot /var/www/html/aim/eyecheck/
+
+        <Directory /var/www/html/aim/eyecheck/>
+                Options Indexes FollowSymLinks
+                AllowOverride all
+                Require all granted
+        </Directory>
+
+//start server
+sudo a2ensite local.conf
+sudo service apache2 restart
+
+
+sudo nano /etc/hosts
+127.0.0.1       local.eyecheck.com
+
+
+
+*******************STEPS*******************VM********HOST********SERVER*****************
+
+//list upgrable $apt list --upgradable
+
+GIT INSTALL: #add-apt-repository ppa:git-core/ppa # sudo apt update; sudo apt install git
+$git --version
+
+
+Permision to file:  sudo chmod -R 777 /var/www/html/aim
+
+
+//viewing list of remote link
+git remote -v
+
+cloneing git if you enable 2fA then password will be personal access token generated password
+git clone "your branch link"
+username: "loginEmailid"//gan@annet.com
+password: "personalAccesstoken"//dbdbca24f6bd0abdf48dffe5ee42aaec0ddcc10e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************routing Start*************Eyecheck
+************************************************
+<VirtualHost *:80>
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	#ServerName www.example.com
+
+	ServerAdmin webmaster@local.eycheck.com 
+        ServerName local.eyecheck.com
+	ServerAlias local.eyecheck.com
+        DocumentRoot /var/www/html/aim/eyecheck/
+
+        <Directory /var/www/html/aim/eyecheck/>
+                Options Indexes FollowSymLinks
+                AllowOverride all
+                Require all granted
+        </Directory>
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+************************************************
+<VirtualHost *:80>
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	#ServerName www.example.com
+
+	ServerAdmin webmaster@local.eycheckpro.com 
+        ServerName local.eyecheckpro.com
+	ServerAlias local.eyecheckpro.com
+        DocumentRoot /var/www/html/aim/eyecheck-pro/
+
+        <Directory /var/www/html/aim/eyecheck-pro/>
+                Options Indexes FollowSymLinks
+                AllowOverride all
+                Require all granted
+        </Directory>
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+************************************************
+
+<VirtualHost *:80>
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	#ServerName www.example.com
+
+	ServerAdmin webmaster@local.intra.com 
+        ServerName local.intra.com
+	ServerAlias local.intra.com
+        DocumentRoot /var/www/html/aim/intra/
+
+        <Directory /var/www/html/aim/intra/>
+                Options Indexes FollowSymLinks
+                AllowOverride all
+                Require all granted
+        </Directory>
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+***********Rounting END*******************************
+
+**********File Sharing Start****************
+The commands are...
+sudo apt-get install samba
+
+cd /
+
+sudo mkdir foldercreatednew
+
+sudo chown techno:techno /folderpath
+
+ls -l
+
+sudo smbpasswd -a techno
+
+sudo vim /etc/samba/smb.conf
+
+[sharedfolderName]
+path = /realpathfromroot
+available = yes
+valid users = techno
+read only = no
+browsable = yes
+public = yes
+writable = yes
+
+// press insert key for vim editor then edit it at last type :wq (write-quite) linux command
+ 
+sudo /etc/init.d/samba restart
+
+ifconfig
+
+cd sharename
+
+ls -l
+***************File sharing End**************
+//Install phpmyadmin
+https://www.ostechnix.com/install-phpmyadmin-with-lamp-stack-on-ubuntu-16-04/
+// if password error occur then refer below link
+https://gsuartana.wordpress.com/2016/08/18/mysql-error-1819-hy000-your-password-does-not-satisfy-the-current-policy-requirements/
+

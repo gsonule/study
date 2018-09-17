@@ -1,0 +1,104 @@
+CodeIgniter:
+
+ -Application Development framework which can be used to develop websites  using PHP.
+ -Its an opensource framework.
+ -It has very rich set of functionality which will increase the speed of the website development work.
+
+
+Features of CI:
+1.Model-view-controller based system
+2.Light weight
+3.Full featured database classes with support for several platforms.
+4.Query Builders database support
+5.Form and data validation
+6.security and XSS filtering
+7.Session management
+8.Email sending class.Supports attachments,HTML/Text email,multiple protocols(sendmail,SMTP and Mail) and more.
+9.Image manipulation library(cropping,resizing,rotating,etc.),support GD, ImageMagick,and NetPBM.
+10.File uploading class
+11.Localization
+12.Pagination
+13.Data encryption
+14.Benchmarking
+15.Full page caching
+16.Error logging
+17.Application Profiling
+18.Calendaring class
+19.User agent class
+20.Zip encoding class
+21.Template Engine class
+22.Trackback class
+23.XML RPC library
+24.Unit testing class
+25.Search engine friendly URLs.
+26.Flexible URI routing
+27.Support for hooks and class extensions
+28.large library of "helper" functions.
+
+
+Directory structure of CI:
+
+  CodeIgniter 3.0
+
+	*-Application
+	    -cache: contains all cached pages of application.it will 	           increase the overall speed of accessing the pages.
+
+	    -config: contains various configurations files of                      appication.with the help of config.php, user can                      configure the application.using database.php,                         user can configure the database of application.
+ 
+ 	    -controllers: holds controllers of the application.
+
+	    -core: contains base class of the application.
+
+	    -helpers: we can put helper class of applicaton.
+
+ 	    -hooks: contains files which modify the inner workings                 of framework without hacking the core files.
+
+	    -Language*(subfolders available): contains language                      related files.	
+			
+	    -libraries:contains files of the libraries developed for 	            application.
+
+	    -logs: contains files related to log of the system.
+
+	    -models: database login will placed inn this folder.
+ 
+            -third_party: in this folder you can place any plugin,               which will be used for application. 	
+
+	    -views*(subfolders available): contains applications HTML 		files.
+	
+	*-System: contains codeigniter core codes, libraries,helpers           and other files, which make the coding easy.
+		this folder contains subfolders:
+
+	   -core: contains codeigniter's core class.do not modify             anything here.all of your work will takeplace in the             	application folder.	
+	
+	   -Database: contains database drivers and other database 	    utility.	
+	
+	   -Font: contains font related information and utilities.
+
+	   -Helpers: contains standard codeigniter 				helpers(eg.date,cookie and URL helpers)	
+	
+	  -language: contains language related files.
+
+	  -libraries: contains standard codeigniter libraries. we can           create our own libraries or even replace standard once, but 	those will be saved in application/libraries directory to 		keep them separate from the codeigniter libraries saved in 		this particular folder.
+ 	
+	*-User Guide: its an offline version of codeigniter 			website.using this one can learn the functions of the various 	libraries,helpers and classes.
+
+	
+	Beside this three folders, one more important file called 	        "index.php". In this we can set the application enviroment 		and error level and we can define system and application 		folder name.
+
+
+
+Codeigniter is based on Model-View-Controller(MVC) Development pattern.
+
+MVC is software approach which separates application logic from presentation.(presentation is separate from PHP scripting.)
+
+1.Model: represents the data structure. Model classes contains funtions that help us to retrive, insert and update information in our database.
+
+2.View:Its an information that is being presented to a user. A view is noramally be a web page, but in codeigniter,a view can also be a page fragment like a header or footer. It can also be an RSS page or any other type of "page".
+
+3.Controller: It serves as an intermediary beteween the Model, the View and any other resources needed to process the HTTP request and generate a web page.
+
+
+
+Model used for Database work.
+View used for Presentation(HTML/front end of the application).
+Controller used for functionality.(coding/backend of the application).

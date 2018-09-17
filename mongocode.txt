@@ -1,0 +1,28 @@
+
+        $m = new MongoClient();
+$db = $m->selectDB("alexa");
+$collections = $db->movie->find();
+foreach($collections as $key => $value){
+var_dump($value);
+}
+
+
+var_dump($m->getConnections());
+
+
+
+------------list of dbs----------------------
+$m = new MongoClient();
+
+$dbs = $m->listDBs();
+print_r($dbs);
+
+---------------------------
+$conn = new MongoClient("mongodb://localhost");
+$dbases = $conn->listDBs(); 
+$num = 0;
+foreach ($dbases['databases'] as $dbs) {
+         $num++;
+        $dbname = $dbs['name'];
+         echo "<br> $num. $dbname"; 
+     }

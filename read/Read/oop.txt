@@ -1,0 +1,734 @@
+What is an object ?
+
+The fundamental idea behind an object-oriented language is to enclose bundle of variables and functions into a single unit and keep both variables and functions safe from outside interference and misuse. Such a unit is called object which acts on data. The mechanism that binds together data and functions are called encapsulation. This feature makes it easy to reuse code in various projects. The functions declared in an object provides the way to access the data. The functions of an object are called methods and all the methods of an object have access to variables called properties.
+Following picture shows the components of an object.
+
+components of an object
+
+Class
+
+In object-oriented programming, a class is a construct or prototype from which objects are created. A class defines constituent members which enable class instances to have state and behavior. Data field members enable a class object to maintain state and methods enable a class object's behavior. Following picture shows the components of a class.
+
+concept of a php class
+
+PHP : Creating classes and Instantiation
+
+The class definition starts with the keyword class followed by a class name, then followed by a set of curly braces ({}) which enclose constants, variables (called "properties"), and functions (called "methods") belonging to the class.
+A valid class name (excluding the reserved words) starts with a letter or underscore, followed by any number of letters, numbers, or underscores.
+Class names usually begin with an uppercase letter to distinguish them from other identifiers.
+An instance is an object that has been created from an existing class.
+Creating an object from an existing class is called instantiating the object.
+To create an object out of a class, the new keyword must be used.
+Classes should be defined prior to instantiation.
+Example :
+
+view plaincopy to clipboardprint?
+<?php  
+class Myclass  
+{        
+ // Add property statements here  
+ // Add the methods here  
+}   
+?>  
+In the following example keyword new is used to instantiate an object. Here $myobj represents an object of the class Myclass.
+
+view plaincopy to clipboardprint?
+<?php      
+$myobj = new MyClass;   
+?>  
+Let see the contents of the class Myclass using var_dump() function (display structured information (type and value) about one or more variables) :
+
+view plaincopy to clipboardprint?
+<?php      
+class Myclass  
+{        
+ // Add property statements here  
+ // Add the methods here  
+}  
+$myobj = new MyClass;  
+var_dump($myobj);  
+?>  
+Output : 
+object(Myclass)#1 (0) { }
+
+View the example in the browser
+
+Go to top
+
+Setting Properties
+
+Class member variables are called properties. Sometimes they are referred as attributes or fields.
+The properties holds specific data and related with the class in which it has been defined.
+Declaring a property in a class is a easy task, use one of the keyword public, protected, or private followed by a normal variable declaration. If declared using var (compatibility with PHP 4), the property will be defined as public.
+public : The property can be accessed from outside the class, either by the script or from another class
+private : No access is granted from outside the class, either by the script or from another class.
+protected : No access is granted from outside the class except from a class that’s a child of the class with the protected property or method.
+nowdocs ( as of PHP 5.3.0) can be used in any static data context, including property declarations.
+Example :
+
+After an object is instantiated, you can access the property of a class using the object and -> operator. Any member declared with keyword "private" or "protected" cannot be accessed outside the method of the class.
+
+view plaincopy to clipboardprint?
+<?php     
+class Myclass  
+{  
+ public $font_size =10;  
+}  
+$f = new MyClass;  
+echo $f->font_size;  
+?>  
+Output : 
+10
+
+View the example in the browser
+Note : There is a common mistake to use more than one dollar sign when accessing variables. In the above example there will be no $ sign before font_size (echo $f->font_size).
+
+After defining methods we will discuss an example with public, private and protected class properties.
+
+Go to top
+
+Setting Methods
+
+The functions which are declared in a class are called methods.
+A class method is exactly similar to PHP functions.
+Declaring a method in a class is a easy task, use one of the keyword public, protected, or private followed by a method name.
+public : The method can be accessed from outside the class.
+private : No access is granted from outside the class.
+protected : No access is granted from outside the class except from a class that’s a child of the class with the protected property or method.
+A valid method name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.
+The method body enclosed within a pair of braces which contains codes. The opening curly brace ( { ) indicates the beginning of the method code and the closing curly ( } ) brace indicates the termination of the method.
+If the method is not defined by public, protected, or private then default is public.
+Can access properties and methods of the current instance using $this (Format $this->property) for non static property.
+Example :
+
+After an object is instantiated, you can access the method of a class using the object and -> operator. In the following example customize_print() method will print a string with a specific fontsize and color within a html paragraph element with the help of php echo statement.
+
+view plaincopy to clipboardprint?
+<?php     
+class Myclass  
+{  
+ public $font_size ="18px";  
+ public $font_color = "blue";  
+ public $string_name = "w3resource";  
+ public function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_name."</p>";  
+ }  
+}  
+$f = new MyClass;  
+echo $f->customize_print();  
+?>  
+Output : 
+method blue string
+
+View the example in the browser
+
+Now change the value of font_size, font_color and the string and check what the method custimize_print() returns.
+
+view plaincopy to clipboardprint?
+<?php     
+class Myclass  
+{  
+ public $font_size ="18px";  
+ public $font_color = "blue";  
+ public $string_name = "w3resource";  
+ public function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_name."</p>";  
+ }  
+}  
+$f = new MyClass;  
+$f->font_size = "20px";  
+$f->font_color = "red";  
+$f->string_name = "Object Oriented Programming";  
+echo $f->customize_print();  
+?>  
+Output : 
+method red string
+
+View the example in the browser
+
+Go to top
+
+PHP : Scope Resolution Operator (::)
+
+In PHP, the scope resolution operator is also called Paamayim Nekudotayim which means "double colon" or "double dot twice" in Hebrew. The double colon (::), is a token which allows access to static, constant, and overridden properties or methods of a class.
+
+PHP : Class Constants
+
+A special entity that remains fixed on an individual class basis.
+Constant names are not preceded by a dollar sign ($) like a normal variable declaration.
+Interfaces may also include constants.
+When calling a class constant using the $classname :: constant syntax, the classname can actually be a variable.
+As of PHP 5.3, you can access a static class constant using a variable reference (Example: className :: $varConstant).
+Define and using a constant
+
+view plaincopy to clipboardprint?
+<?php  
+  class MyClass  
+  {  
+  const constant1 = 'PHP Class Constant';  
+  function PrintConstant()   
+  {  
+  echo  self::constant1 . "<br>";  
+  }  
+  }  
+  echo MyClass::constant1 . "<br>";  
+  $classname = "MyClass";  
+  echo $classname::constant1 . "<br>"; // As of PHP 5.3.0  
+  $class = new MyClass();  
+  $class->PrintConstant();  
+  echo $class::constant1."<br>"; // As of PHP 5.3.0  
+ ?>  
+Go to top
+
+Understanding public, private, protected properties
+
+Properties can be public, private or protected. Public means that properties can be accessed everywhere, private means properties can be accessed by the class that defines the member and protected means properties can be accessed only within the class itself and by inherited and parent classes.
+
+Example :
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class Myclass  
+{  
+ // Declare $font_size as Public property  
+ public $font_size ="18px";   
+ // Declare $font_color as Private property  
+ private $font_color = "blue";   
+ // Declare $string_name as Protected property  
+ protected $string_name = "w3resource";   
+ // Declare a method to print properties value. This is public.  
+ function property_print()  
+ {  
+ echo $this->font_size;  
+ echo $this->font_color;  
+ echo $this->string_name;  
+ }  
+}  
+$obj = new MyClass;  
+echo $obj->font_size; //Display 18px   
+echo $obj->font_color; //Fatal error: Cannot access private property Myclass::$font_color in F:\wamp\..  
+echo $obj->string_name; //Fatal error: Cannot access protected property Myclass::$string_name in F:\wamp\..   
+$obj->property_print(); //Display 18pxbluew3resource  
+?>  
+Go to top
+
+Understanding public, private, protected methods
+
+Methods can be public, private or protected. Public means that methods can be accessed everywhere, private means methods can be accessed by the class that defines the member and protected means methods can be accessed only within the class itself and by inherited and parent classes.
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class Myclass  
+ {  
+ // Declare a public method<br> public function my_public_method()  
+ {  
+ echo "This is a Public method";   
+ }   
+ private function my_private_method()  
+ {  
+ echo "This is a Private method";   
+ }  
+ protected function my_protected_method()  
+ {  
+ echo "This is a Protected method";   
+ }   
+ // This is public  
+ function test()  
+ {  
+ $this->my_public_method();  
+ $this->my_private_method();  
+ $this->my_protected_method();  
+ }  
+ }  
+ $obj = new MyClass;  
+ $obj->my_public_method(); //Display This is a Public method  
+ $obj->my_private_method();//Fatal error: Call to private method Myclass::my_private_method() from context '' in F:\wamp\www..  
+ $obj>my_protected_method();//Fatal error: Call to undefined function my_protected_method() in F:\wamp\www..  
+ $obj->test(); //Display This is a Public methodThis is a Private methodThis is a Protected method  
+?>  
+Note : PHP uses inheritance in it's object model and when you extend a class, the subclass inherits all of the public and protected methods from the parent class. When we will discuss the inheritance, you will get more information about protected properties and methods.
+
+Go to top
+
+PHP Constructor methods
+
+The constructor is a special built-in method, added with PHP 5, allows developers to declare for classes.
+Constructors allow to initialize object properties ( i.e. the values of properties) when a object is created.
+Classes which have a constructor method execute automatically when an object is created.
+The 'construct' method starts with two underscores (__).
+Constructor is not required if you don't want to pass any property values or perform any actions when the object is created.
+PHP only ever calls one constructor.
+The general syntax for constructor declaration follows :
+
+function __construct([argument1, argument2, ..., argumentN])
+{
+/* Class initialization code */
+}
+The type of argument1, argument2,.......,argumentN are mixed.
+
+Example :
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+ class Myclass  
+ {  
+// Declaring three private varaibles  
+ private $font_size;  
+ private $font_color;  
+ private $string_value;  
+// Declarte construct method which accepts three parameters  
+ function __construct($font_size,$font_color,$string_value)  
+ {  
+ $this->font_size = $font_size;  
+ $this->font_color = $font_color;  
+ $this->string_value = $string_value;  
+ }  
+// Declare a method for customize print   
+ function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_value."</p>";  
+ }   
+ }  
+// Create a new object and passes three parameters  
+ $f = new MyClass('20px','red','Object Oriented Programming');  
+// Call the method to display the string  
+ echo $f->customize_print();  
+ ?>  
+Output : 
+method red string
+
+View the example in the browser
+
+Go to top
+
+More example on constructors :
+
+Like properties, constructors can call class methods or other functions. In the following example there is no need to call the method separately (after creating the object and passing the parameters, see the previous example) as it is already declared within the constructor. See the following example :
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+ class Myclass  
+ {  
+// Declaring three private variables  
+ private $font_size;  
+ private $font_color;  
+ private $string_value;  
+// Declarte construct method which accepts three parameters and the method customize_print()  
+ function __construct($font_size,$font_color,$string_value)  
+ {  
+ $this->font_size = $font_size;  
+ $this->font_color = $font_color;  
+ $this->string_value = $string_value;  
+ $this->customize_print();  
+ }  
+// Declare a method for customize print   
+ function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_value."</p>";  
+ }   
+ }  
+// Create a new object and passes three parameters   
+ $f = new MyClass('20px','red','Object Oriented Programming');  
+ ?>  
+Output : 
+method red string
+
+View the example in the browser
+
+Go to top
+
+PHP Destructors methods
+
+Destructor is the counterpart of constructor.
+A destructor function is called when the object is destroyed
+A destructor function cleans up any resources allocated to an object after the object is destroyed.
+A destructor function is commonly called in two ways: When a script ends or manually delete an object with the unset() function
+The 'destructor' method starts with two underscores (__).
+The general syntax for destructor declaration follows :
+
+function __destruct 
+{
+/* Class initialization code */
+}
+The type of argument1, argument2,.......,argumentN are mixed.
+
+Example :
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class MyClass  
+{  
+ function __construct()   
+  {  
+    echo 'w3resource'.'<br>';  
+    $this->name = "MyClass";  
+  }  
+ function __destruct()   
+  {  
+    echo "Destroying " . $this->name . "<br>";  
+  }  
+}  
+$obj = new MyClass();  
+?>  
+Output : 
+w3resource
+Destroying MyClass
+
+View the example in the browser
+
+Go to top
+
+PHP : Using multiple instances of the same class
+
+In the following example we have created multiple objects (instances) of the same class and passes different values.
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class Myclass  
+ {  
+// Declaring three private varaibles  
+ private $font_size;  
+ private $font_color;  
+ private $string_value;  
+// Declarte construct method which accepts three parameters and the method customize_print()  
+ function __construct($font_size,$font_color,$string_value)  
+ {  
+ $this->font_size = $font_size;  
+ $this->font_color = $font_color;  
+ $this->string_value = $string_value;  
+ $this->customize_print();  
+ }  
+// Declare a method for customize print   
+ function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_value."</p>";  
+ }  
+ }  
+// Create first object and passes three parameters   
+ $a = new MyClass('30px','red','Object Oriented Programming');  
+// Create second object and passes three parameters   
+ $b = new MyClass('25px','blue','Object Oriented Programming');  
+// Create third object and passes three parameters   
+ $c = new MyClass('20px','green','Object Oriented Programming');  
+// Create fourth object and passes three parameters   
+ $d = new MyClass('15px','black','Object Oriented Programming');  
+ ?>  
+Output :
+
+multiple objects
+
+View the example in the browser
+
+Go to top
+
+PHP : spl_autoload_register()
+
+Many developers writing object-oriented applications create one PHP source file per class definition. One of the biggest annoyances is having to write a long list of needed includes at the beginning of each script (one for each class). Traditionally __autoload() function was used to automatically load classes. As of PHP 5.1.2 a new function spl_autoload_register() is introduced which provides a more flexible alternative for autoloading classes. For this reason, using __autoload() is discouraged and may be deprecated or removed in the future.
+
+Syntax
+
+bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] )
+
+Parameter
+
+Name	Description
+autoload_function	The autoload function being registered. If no parameter is provided, then the default implementation of spl_autoload() will be registered.
+throw	This parameter specifies whether spl_autoload_register() should throw exceptions when the autoload_function cannot be registered.
+prepend	If true, spl_autoload_register() will prepend the autoloader on the autoload stack instead of appending it.
+Return values
+
+Returns TRUE on success or FALSE on failure.
+
+You can use spl_autoload_register() function in following way :
+
+view plaincopy to clipboardprint?
+<?php  
+ spl_autoload_register(function ($class)   
+ {  
+ include 'classes/' . $class . '.class.php';  
+ });  
+?>  
+Example :
+
+At first  we will create two classes and store them in /php/classes-objects/resource path : 
+class1.php
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class class1  
+ {  
+// Declaring two private varaibles  
+ private $font_color;  
+ private $string_value;  
+// Declarte construct method which accepts two parameters and the method customize_print1()  
+ function __construct($font_color,$string_value)  
+ {  
+ $this->font_color = $font_color;  
+ $this->string_value = $string_value;  
+ $this->customize_print1();  
+ }  
+// Declare a method for customize print   
+ function customize_print1()  
+ {  
+ echo "<p style=color:".$this->font_color.";>".$this->string_value."</p>";  
+ }   
+ }  
+?>  
+class2.php
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class class2  
+ {  
+// Declaring two private varaibles  
+ private $font_size;  
+ private $string_value;  
+// Declarte construct method which accepts two parameters and the method customize_print2()  
+ function __construct($font_size,$string_value)  
+ {  
+ $this->font_size = $font_size;  
+ $this->string_value = $string_value;  
+ $this->customize_print2();  
+ }  
+// Declare a method for customize print   
+ function customize_print2()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";>".$this->string_value."</p>";  
+ }  
+ }  
+?>  
+Now, create a file printstring.php and save it in /php/classes-objects :
+
+view plaincopy to clipboardprint?
+<?php  
+spl_autoload_register(function ($class)  
+ {  
+ include '../../php/classes-objects/resource/'.$class.'.php';  
+ });  
+$print1 = new class1('red','Object Oriented Programming');   
+$print2 = new class2('20px','Object Oriented Programming');   
+?>  
+In the above example we are trying to create two objects, where class names 'class1' (save in /php/classes-objects/resource/class1.php) and 'class2' (save in /php/classes-objects/resource/class2.php). PHP passes this name as a string to spl_autoload_register(), which allows you to pick up the variable and use it to "include" the appropriate class/file.
+
+Output :
+
+autoupload two classes
+
+View the example in the browser
+
+Go to top
+
+PHP : Inheritance
+
+Inheritance is a well-established programming principle.
+Inheritance enables classes to form a hierarchy like a family tree.
+Allows subclasses to share the methods and properties (which are public or protected) of its superclass.
+Superclass is the parent class.
+A subclass can add properties and methods.
+Inheritance allows to reuse code.
+php inheritance
+
+Example :
+
+In the following example subclass 'Mysubclass' inherits all the protected properties and public method from 'Myclass' class. In addition we add an text decoration attribute within echo statement in the subclass 'Mysubclass'.
+
+view plaincopy to clipboardprint?
+<?php  
+// Define a class  
+class Myclass  
+ {  
+// Declaring three protected varaibles<br> protected $font_size;  
+ protected $font_color;  
+ protected $string_value;  
+// Declarte construct method which accepts three parameters and the method customize_print()  
+ function __construct($font_size,$font_color,$string_value)  
+ {  
+ $this->font_size = $font_size;  
+ $this->font_color = $font_color;  
+ $this->string_value = $string_value;  
+ $this->customize_print();  
+ }  
+// Declare a method for customize print   
+ public function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";>".$this->string_value."</p>";  
+ }   
+ }  
+// Define a subclass  
+class Mysubclass extends Myclass  
+ {  
+ // Call the method customize print() and add the text decoration attribute within echo statement  
+ public function customize_print()  
+ {  
+ echo "<p style=font-size:".$this->font_size.";color:".$this->font_color.";text-decoration:underline;>".$this->string_value."</p>";  
+ }  
+ }  
+// Create objects and passes parameters  
+ $p = new Myclass('20px','red','Object Oriented Programming');  
+ $s = new Mysubclass('15px','green','Object Oriented Programming');  
+?>  
+Output :
+
+autoupload two classes
+
+View the example in the browser
+
+Go to top
+
+PHP : Interfaces
+
+Provides methods to implement.
+Derived classes may implement more than one interface.
+Interfaces may inherit from other interfaces using the extends keyword.
+All methods are assumed to be public in the interface definition can be defined explicitly as public or implicitly
+When a class implements multiple interfaces there cannot be any naming collision between methods defined in the different interfaces.
+Syntax :
+
+interface MyInterface
+ {
+   function method1();
+   function method2();  
+ } 
+class MyClass implements MyInterface  
+ { 
+   function method1() 
+    { 
+ 	    // definition of method1 
+    }
+   function method2()
+    {
+	   // definition of method2
+    }
+ }
+Go to top
+
+PHP : Object Cloning
+
+Cloning is used to create a copy of an object.
+An object copy is created by using the clone keyword.
+When an object is cloned, PHP 5 will perform a shallow copy of all of the object's properties.
+Any properties that are references to other variables, will remain references.
+PHP provides a special method __clone to copy an object.
+Once the cloning is complete, if a __clone() method is defined, then the newly created object's __clone() method will be called, to allow any necessary properties that need to be changed.
+Example :
+
+In PHP object cloning is done using clone keyword. Here is an example of object cloning :
+
+Example : Object cloning with magic method __clone
+
+view plaincopy to clipboardprint?
+<?php  
+class MyClass  
+{  
+ public $x;  
+ private $y;  
+ function __construct($x, $y)  
+ {  
+  $this->  
+  x = $x;  
+  $this->  
+  y = $y;  
+ }  
+ function __clone()  
+ {  
+  $this->x = "z";  
+ }  
+}  
+$a = new MyClass("w3resource", "com"); // create a new object  
+$b = clone $a; //clone of the object  
+var_dump($a);  
+echo '<br>';  
+var_dump($b);  
+?>  
+Output :
+
+object(MyClass)#1 (2) { ["x"]=> string(10) "w3resource" ["y":"MyClass":private]=> string(3) "com" } 
+object(MyClass)#2 (2) { ["x"]=> string(1) "z" ["y":"MyClass":private]=> string(3) "com" }
+
+View the example in the browser
+
+Go to top
+
+PHP : Magic methods
+
+The function names __construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(), __sleep(), __wakeup(), __toString(), __invoke(), __set_state() and __clone() are magical in PHP classes. PHP reserves all function names starting with __ as magical.
+
+We have already discussed __construct(), __destruct() and __clone() methods.
+
+Here are other magic methods :
+
+__call()
+
+__call() is triggered when invoking inaccessible methods in an object context.
+
+Syntax : public mixed __call ( string $name , array $arguments )
+
+__callStatic()
+
+__callStatic() is triggered when invoking inaccessible methods in a static context.
+
+Syntax : public mixed __call ( string $name , array $arguments )
+
+__get()
+
+__get() is utilized for reading data from inaccessible properties.
+
+Syntax : public mixed __get ( string $name )
+
+__set()
+
+__set() is run when writing data to inaccessible properties.
+
+Syntax : public void __set ( string $name , mixed $value )
+
+__isset()
+
+__isset() is triggered by calling isset() or empty() on inaccessible properties.
+
+Syntax : public bool __isset ( string $name )
+
+__unset()
+
+__unset() is invoked when unset() is used on inaccessible properties.
+
+Syntax : public void __unset ( string $name )
+
+__sleep()
+
+__sleep() is used to commit pending data or perform similar cleanup tasks. Also, the function is useful if you have very large objects which do not need to be saved completely.
+
+Syntax : public array __sleep ( void )
+
+__wakeup()
+
+__wakeup() is used to reestablish any database connections that may have been lost during serialization and perform other reinitialization tasks.
+
+Syntax : void __wakeup ( void )
+
+__toString()
+
+The __toString() method allows a class to decide how it will react when it is treated like a string.
+
+Syntax : public string __toString ( void )
+
+__invoke()
+
+The __invoke() method is called when a script tries to call an object as a function.
+
+Syntax : mixed __invoke ([ $... ] )
+
+__set_state()
+
+This static method is called for classes exported by var_export() since PHP 5.1.0.
+
+Syntax : static object __set_state ( array $properties )

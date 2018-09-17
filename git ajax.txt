@@ -1,0 +1,27 @@
+reset::	git reset HEAD~1 --soft  
+undo:: git reset 'HEAD@{1}'
+
+//on click pass varaibles
+<a href="link.php" class="post">submit content using link</a>
+
+ <script type="text/javascript">
+            jQuery(document).ready(function($){
+                $(".post").on("click",function(){
+                    $.ajax({
+                        url: "http://www.yourwebsite.com/page.php",
+                        type: "POST",
+                        data: { name: "John", location: "Boston" },
+                        success: function(response){
+                              //do action  
+                        },
+                        error: function(){
+                              // do action
+                        }
+                    });
+                });
+            });
+        </script>
+		
+		    return array('error' => false, 'msg' => "Success", "passkey" => $insertintodb);
+        } catch (Exception $e) {
+            return array('error' => true, 'msg' => $e->getMessage());
