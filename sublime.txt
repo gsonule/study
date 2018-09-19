@@ -1,0 +1,11 @@
+[
+	{ "keys": "ctrl+y", "command": "show_overlay", "args": {"overlay": "command_palette", "text": "Snippet: "}},
+	{ "keys": ["ctrl+alt+l"], "command": "insert_snippet", "args": {"contents": "echo \"<pre>\";print_r(\\$$0);die;"} },
+	{ "keys": ["ctrl+alt+c"], "command": "insert_snippet", "args": {"contents": "console.log($0);"} },
+	{ "keys": ["ctrl+alt+a"], "command": "insert_snippet", "args": {"contents": "alert(123);"} },
+	{ "keys": ["ctrl+shift+r"], "command": "reindent" , "args": { "single_line": false } },
+	{ "keys": ["ctrl+alt+g"], "command": "code_formatter"}
+]
+
+
+Perferences -> key bindings
