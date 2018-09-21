@@ -1,0 +1,68 @@
+//before it create one container in web hosting server
+
+//crontab File
+0 3 * * * php /var/www/html/cron_jobs/cron_sales_sub_detail_intra.php >> /var/www/html/cron_jobs/cron_sales_sub_detail_intra.log 2>&1
+
+//cron_sales_sub_detail_intra.php
+<?php 
+include "/var/www/html/cron_jobs/db_crud/intraSalesListCronDB.php";
+$db_sales   = new intraSalesListCronDB();
+$db_sales->salesSubDetail();
+?>
+//Docekerfile
+FROM quay.io/aptible/php:7.1
+
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y \
+      apache2 \
+      php7.0 \
+      php7.0-cli \
+      libapache2-mod-php7.0 \
+      php7.0-gd \
+      php7.0-json \
+      php7.0-ldap \
+      php7.0-mbstring \
+      php7.0-mysql \
+      php7.0-mcrypt \
+      php7.0-pgsql \
+      php7.0-sqlite3 \
+      php7.0-xml \
+      php7.0-xsl \
+      php7.0-zip \
+      php7.0-soap
+
+WORKDIR /app
+
+RUN rm -fr /app
+ADD . /app
+RUN rm -fr /var/www/html
+RUN ln -s /app /var/www/html
+
+RUN chmod 777 /app/user/Upload/
+RUN chmod 777 /app/uploads/
+
+RUN a2enmod rewrite
+RUN a2enmod proxy_http
+
+RUN cp /var/www/html/default-1.conf /etc/apache2/sites-available/000-default.conf
+RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/apache2/apache2.conf
+
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.5/supercronic-linux-amd64 \
+    SUPERCRONIC=supercronic-linux-amd64 \
+    SUPERCRONIC_SHA1SUM=a9asbsadr41e00cadda878741asdasdas1
+
+RUN curl -fsSLO "$SUPERCRONIC_URL" \
+ && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
+ && chmod +x "$SUPERCRONIC" \
+ && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
+ && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
+
+ADD crontab /app/crontab
+RUN chmod 777 /var/www/html/crontab
+RUN chmod 777 /var/www/html/crontab/crontab
+RUN chmod -R 777 /var/www/html/app
+
+RUN phpenmod opcache
+RUN service apache2 restart
+EXPOSE 80
